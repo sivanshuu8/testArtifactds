@@ -1,606 +1,339 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bean & Brew | Artisan Coffee</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* CSS Variables for consistent theming */
-        :root {
-            --primary-brown: #8B4513;
-            --light-brown: #A0522D;
-            --cream: #FFF8DC;
-            --dark-cream: #F5DEB3;
-            --accent-gold: #DAA520;
-            --text-dark: #3E2723;
-            --text-light: #5D4037;
-            --white: #FFFFFF;
-            --shadow: rgba(139, 69, 19, 0.15);
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bob — Software Developer</title>
+  <meta name="description" content="Personal portfolio of Bob — Software Developer. Includes hero, about, skills, and contact sections. Dark theme with gradient accent. Single-file HTML." />
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <!-- Google Font (Optional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--cream);
-        }
+  <style>
+    :root{
+      --bg:#071021; /* deep navy */
+      --card: rgba(255,255,255,0.03);
+      --muted: #9aa6b2;
+      --glass: rgba(255,255,255,0.03);
+      --accent-start:#7b2ff7; /* purple */
+      --accent-end:#2dd4bf;   /* teal */
+      --accent-gradient: linear-gradient(135deg,var(--accent-start),var(--accent-end));
+      --radius:14px;
+      --max-width:1100px;
+    }
 
-        /* Header & Navigation */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(123,47,247,0.12), transparent),
+                  radial-gradient(900px 400px at 90% 90%, rgba(45,212,191,0.06), transparent),
+                  var(--bg);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:36px 20px;
+      display:flex;
+      justify-content:center;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+    }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
+    /* Header / Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:24px;
+      align-items:center;
+      margin-bottom:28px;
+    }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:40px;
+      box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+      display:flex;
+      gap:28px;
+      align-items:center;
+      min-height:180px;
+    }
 
-        .logo-icon {
-            color: var(--primary-brown);
-            font-size: 24px;
-        }
+    .hero-left{
+      flex:1;
+    }
 
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-brown);
-        }
+    h1{
+      margin:0 0 8px 0;
+      font-size: clamp(28px, 4vw, 42px);
+      letter-spacing: -0.02em;
+      font-weight:800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-        .logo-text span {
-            color: var(--light-brown);
-        }
+    .title-sub{
+      margin:0;
+      font-weight:600;
+      color:var(--muted);
+      font-size:16px;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
+    .cta-row{margin-top:18px; display:flex; gap:12px; align-items:center}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:10px; font-weight:600; font-size:14px;
+      cursor:pointer; border:1px solid transparent; text-decoration:none; color:inherit;
+      transition: transform .15s ease, box-shadow .15s ease;
+      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
+    .btn:active{transform:translateY(1px)}
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
+    .btn-primary{
+      background: var(--accent-gradient);
+      color: #051018; box-shadow: 0 6px 22px rgba(43,19,145,0.25);
+    }
 
-        .nav-links a:hover {
-            color: var(--primary-brown);
-        }
+    .avatar{
+      width:128px; height:128px; border-radius:18px; overflow:hidden; flex-shrink:0;
+      border:1px solid rgba(255,255,255,0.04); background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      display:flex; align-items:center; justify-content:center;
+    }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--primary-brown);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s;
-        }
+    .avatar svg{width:90px; height:90px; opacity:0.9}
 
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+    /* Sections grid */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.25fr .9fr;
+      gap:22px;
+      align-items:start;
+    }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(139, 69, 19, 0.85), rgba(139, 69, 19, 0.7)), 
-                        url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            color: var(--white);
-            padding: 100px 0;
-            text-align: center;
-        }
+    .card{
+      background:var(--card);
+      border-radius:calc(var(--radius) - 2px);
+      padding:22px;
+      box-shadow: 0 8px 30px rgba(3,6,20,0.6);
+      border: 1px solid rgba(255,255,255,0.02);
+    }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    .section-title{
+      display:flex; align-items:center; gap:12px; margin-bottom:12px;
+    }
+    .section-title h3{margin:0; font-size:16px}
+    .section-title p{margin:0; color:var(--muted); font-size:13px}
 
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
+    /* About */
+    .about p{margin:0 0 12px 0; color:#cfe0ea}
 
-        .hero .tagline {
-            font-size: 24px;
-            margin-bottom: 30px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
+    /* Skills badges */
+    .skills{display:flex; flex-wrap:wrap; gap:10px}
+    .skill{
+      padding:8px 12px; border-radius:999px; font-weight:600; font-size:13px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.03);
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .skill .dot{
+      width:10px; height:10px; border-radius:50%;
+      background:var(--accent-start); background:var(--accent-gradient);
+      box-shadow:0 4px 18px rgba(43,19,145,0.18);
+    }
 
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
+    /* Contact */
+    .contact-list{display:flex; flex-direction:column; gap:12px}
+    .contact-item{
+      display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:10px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .contact-item a{color:inherit; text-decoration:none; font-weight:600}
+    .contact-meta{color:var(--muted); font-size:13px}
 
-        .cta-button {
-            display: inline-block;
-            background-color: var(--accent-gold);
-            color: var(--white);
-            padding: 15px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 18px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
-        }
+    /* Footer tiny */
+    footer{margin-top:18px; text-align:center; color:var(--muted); font-size:13px}
 
-        .cta-button:hover {
-            background-color: var(--primary-brown);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(218, 165, 32, 0.4);
-        }
+    /* Responsive */
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+      .hero{grid-template-columns:1fr}
+      .avatar{width:96px;height:96px}
+      .hero-card{padding:22px}
+    }
 
-        /* Menu Section */
-        .menu-section {
-            padding: 80px 0;
-            background-color: var(--dark-cream);
-        }
+    @media (max-width:480px){
+      body{padding:20px}
+      .hero-card{flex-direction:column; align-items:flex-start}
+      .cta-row{flex-direction:column; width:100%}
+      .btn{width:100%; justify-content:center}
+    }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--primary-brown);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent-gold);
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .menu-item {
-            background-color: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px var(--shadow);
-        }
-
-        .menu-image {
-            height: 200px;
-            background-color: var(--light-brown);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 60px;
-        }
-
-        .menu-content {
-            padding: 25px;
-        }
-
-        .menu-content h3 {
-            font-size: 22px;
-            color: var(--primary-brown);
-            margin-bottom: 10px;
-        }
-
-        .menu-content p {
-            color: var(--text-light);
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-
-        .price {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
-        }
-
-        .price span {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary-brown);
-        }
-
-        .order-btn {
-            background-color: var(--accent-gold);
-            color: var(--white);
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .order-btn:hover {
-            background-color: var(--primary-brown);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--primary-brown);
-            color: var(--white);
-            padding: 60px 0 30px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 22px;
-            margin-bottom: 20px;
-            color: var(--dark-cream);
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent-gold);
-            bottom: 0;
-            left: 0;
-        }
-
-        .footer-column p {
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-
-        .contact-info {
-            list-style: none;
-        }
-
-        .contact-info li {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .contact-info i {
-            color: var(--accent-gold);
-            width: 20px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent-gold);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 14px;
-            opacity: 0.7;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .nav-links {
-                gap: 20px;
-            }
-            
-            .hero h1 {
-                font-size: 36px;
-            }
-            
-            .hero .tagline {
-                font-size: 20px;
-            }
-            
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title h2 {
-                font-size: 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                padding: 60px 0;
-            }
-            
-            .hero h1 {
-                font-size: 28px;
-            }
-            
-            .hero .tagline {
-                font-size: 18px;
-            }
-            
-            .nav-links {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-        }
-    </style>
+  </style>
 </head>
 <body>
-    <!-- Header & Navigation -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <i class="fas fa-coffee logo-icon"></i>
-                    <div class="logo-text">Bean <span>&</span> Brew</div>
-                </div>
-                <div class="nav-links">
-                    <a href="#home">Home</a>
-                    <a href="#menu">Menu</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
-                </div>
-            </nav>
+  <main class="container" role="main">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-card" role="banner">
+        <div class="hero-left">
+          <h1>Bob</h1>
+          <p class="title-sub">Software Developer — Full-stack engineering, APIs & cloud-native apps</p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contact" aria-label="Contact Bob">Get in touch</a>
+            <a class="btn" href="#about" aria-label="About Bob">About me</a>
+          </div>
         </div>
+
+        <div class="avatar" aria-hidden="true">
+          <!-- Simple SVG avatar placeholder -->
+          <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#7b2ff7"/>
+                <stop offset="1" stop-color="#2dd4bf"/>
+              </linearGradient>
+            </defs>
+            <rect width="128" height="128" rx="18" fill="url(#g)" />
+            <circle cx="64" cy="48" r="20" fill="rgba(255,255,255,0.92)" />
+            <rect x="28" y="80" width="72" height="18" rx="9" fill="rgba(255,255,255,0.9)" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- small meta / quick links (optional) -->
+      <div style="display:flex;flex-direction:column;gap:12px;align-self:stretch;">
+        <div class="card" style="display:flex;flex-direction:column;gap:10px;min-width:240px;">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-weight:700">Based in</div>
+              <div style="color:var(--muted);font-size:13px">Remote / Anywhere</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="min-width:240px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-start);background:var(--accent-gradient)"></div>
+            <div style="font-weight:700">Open to work</div>
+          </div>
+          <div style="color:var(--muted);font-size:13px">Available for freelance, contract, and full-time roles.</div>
+        </div>
+      </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Experience the Perfect Brew</h1>
-                <div class="tagline">Where every bean tells a story</div>
-                <p>At Bean & Brew, we craft exceptional coffee experiences using ethically sourced beans and artisan roasting techniques. Our passion is creating the perfect cup for every moment.</p>
-                <a href="#menu" class="cta-button">Explore Our Menu</a>
-            </div>
+    <!-- GRID: ABOUT + RIGHT COLUMN -->
+    <section class="grid">
+
+      <div class="card about">
+        <div class="section-title">
+          <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-start);background:var(--accent-gradient)"></div>
+          <div>
+            <h3>About Me</h3>
+            <p class="section-sub">A short intro</p>
+          </div>
         </div>
+
+        <p>Hi — I'm Bob. I build web applications and APIs with a focus on performance, maintainability, and delightful user experiences. I enjoy working across the stack, from designing scalable backend services to crafting accessible, responsive UI.</p>
+
+        <p>I have experience with cloud platforms, containerization, and modern frontend frameworks. I like to keep projects simple, testable, and well-documented.</p>
+
+        <div style="margin-top:12px">
+          <h4 style="margin:0 0 8px 0">Recent focus</h4>
+          <ul style="margin:0;padding-left:18px;color:var(--muted)">
+            <li>Designing REST/GraphQL APIs and microservices</li>
+            <li>Serverless & container-based deployments (Docker, Kubernetes)</li>
+            <li>Type-safe frontend apps with modern state management</li>
+          </ul>
+        </div>
+
+        <!-- Skills section inside about to emphasize tech -->
+        <div style="margin-top:18px">
+          <div class="section-title">
+            <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-start);background:var(--accent-gradient)"></div>
+            <div>
+              <h3>Skills</h3>
+              <p class="section-sub">Technologies I use</p>
+            </div>
+          </div>
+
+          <div class="skills" aria-label="Skills">
+            <span class="skill"><span class="dot"></span>JavaScript / TypeScript</span>
+            <span class="skill"><span class="dot"></span>React</span>
+            <span class="skill"><span class="dot"></span>Node.js</span>
+            <span class="skill"><span class="dot"></span>GraphQL</span>
+            <span class="skill"><span class="dot"></span>Docker / Kubernetes</span>
+            <span class="skill"><span class="dot"></span>AWS / Cloud</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: Contact & Quick Links -->
+      <aside style="display:flex;flex-direction:column;gap:18px">
+        <div class="card">
+          <div class="section-title">
+            <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-start);background:var(--accent-gradient)"></div>
+            <div>
+              <h3 id="contact">Contact</h3>
+              <p class="section-sub">Reach out</p>
+            </div>
+          </div>
+
+          <div class="contact-list">
+            <div class="contact-item" role="article">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 8.5v7A3.5 3.5 0 006.5 19h11A3.5 3.5 0 0021 15.5v-7" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div style="display:flex;flex-direction:column">
+                <a href="mailto:bob@example.com">bob@example.com</a>
+                <span class="contact-meta">Prefer email for initial contact</span>
+              </div>
+            </div>
+
+            <div class="contact-item" role="article">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 8a6 6 0 016 6v6h-4v-6a2 2 0 00-4 0v6h-4v-6a6 6 0 016-6z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 9h4v12H2z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <div style="display:flex;flex-direction:column">
+                <a href="https://linkedin.com/in/bob" target="_blank" rel="noopener">linkedin.com/in/bob</a>
+                <span class="contact-meta">Connect with me on LinkedIn</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="card">
+          <h4 style="margin:0 0 8px 0">Availability</h4>
+          <p style="margin:0;color:var(--muted)">Open to collaborate on small teams or independent projects. Let's build something impactful.</p>
+        </div>
+
+      </aside>
+
     </section>
 
-    <!-- Menu Section -->
-    <section class="menu-section" id="menu">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Signature Brews</h2>
-                <p>Handcrafted with passion and precision</p>
-            </div>
-            <div class="menu-grid">
-                <!-- Coffee Item 1 -->
-                <div class="menu-item">
-                    <div class="menu-image">
-                        <i class="fas fa-mug-hot"></i>
-                    </div>
-                    <div class="menu-content">
-                        <h3>Classic Espresso</h3>
-                        <p>A rich, bold shot of our finest Arabica beans, perfectly extracted for that authentic Italian experience.</p>
-                        <div class="price">
-                            <span>$3.50</span>
-                            <button class="order-btn">Order Now</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Coffee Item 2 -->
-                <div class="menu-item">
-                    <div class="menu-image">
-                        <i class="fas fa-coffee"></i>
-                    </div>
-                    <div class="menu-content">
-                        <h3>Caramel Macchiato</h3>
-                        <p>Velvety steamed milk with rich espresso and a drizzle of caramel, topped with foam art.</p>
-                        <div class="price">
-                            <span>$5.25</span>
-                            <button class="order-btn">Order Now</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Coffee Item 3 -->
-                <div class="menu-item">
-                    <div class="menu-image">
-                        <i class="fas fa-thermometer-full"></i>
-                    </div>
-                    <div class="menu-content">
-                        <h3>Cold Brew Delight</h3>
-                        <p>Slow-steeped for 18 hours for a smooth, less acidic taste with subtle chocolate notes.</p>
-                        <div class="price">
-                            <span>$4.75</span>
-                            <button class="order-btn">Order Now</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Coffee Item 4 -->
-                <div class="menu-item">
-                    <div class="menu-image">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <div class="menu-content">
-                        <h3>Vanilla Bean Latte</h3>
-                        <p>Our house-made vanilla syrup blended with espresso and steamed milk for a comforting treat.</p>
-                        <div class="price">
-                            <span>$5.00</span>
-                            <button class="order-btn">Order Now</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Bean & Brew</h3>
-                    <p>We're passionate about bringing you the finest coffee experience. Our beans are ethically sourced and roasted daily to ensure maximum freshness.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact Info</h3>
-                    <ul class="contact-info">
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>123 Coffee Street, Brewville, CA 90210</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-phone"></i>
-                            <span>(555) 123-4567</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope"></i>
-                            <span>hello@beanandbrew.com</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-clock"></i>
-                            <span>Mon-Fri: 6:00 AM - 8:00 PM<br>Sat-Sun: 7:00 AM - 9:00 PM</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Visit Us</h3>
-                    <p>Come experience our cozy atmosphere, perfect for morning coffee, afternoon meetings, or relaxing with a good book.</p>
-                    <p>Free Wi-Fi available for all customers. We also offer outdoor seating for sunny days.</p>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 Bean & Brew Coffee Shop. All rights reserved. | Designed with <i class="fas fa-heart" style="color: #ff6b6b;"></i> for coffee lovers everywhere</p>
-            </div>
-        </div>
+    <footer>
+      <div>Made with a focus on clarity, performance & accessibility.</div>
+      <div style="margin-top:8px;color:var(--muted)">This is a single-file static template — replace placeholders (email / LinkedIn) with your real info.</div>
     </footer>
 
-    <!-- Simple JavaScript for interactive elements -->
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Order button functionality
-        document.querySelectorAll('.order-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const coffeeName = this.closest('.menu-item').querySelector('h3').textContent;
-                alert(`Added "${coffeeName}" to your order! Visit our shop to complete your purchase.`);
-            });
-        });
-        
-        // Add active class to current navigation link
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-links a');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if(window.scrollY >= (sectionTop - 100)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if(link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
+  </main>
+
+  <!-- Minimal script: smooth scroll for anchor links -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        e.preventDefault();
+        const t=document.querySelector(a.getAttribute('href'));
+        if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+  </script>
 </body>
 </html>
