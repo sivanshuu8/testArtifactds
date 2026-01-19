@@ -1,339 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Bob — Software Developer</title>
-  <meta name="description" content="Personal portfolio of Bob — Software Developer. Includes hero, about, skills, and contact sections. Dark theme with gradient accent. Single-file HTML." />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCB</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  <!-- Google Font (Optional) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+        .background-container {
+            background-image: url('https://sgetecymsgwpjhhqxkxu.supabase.co/storage/v1/object/public/contagysai/public/files/34424174-f1a1-48f9-9ab4-226ac419cac7/barca2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
 
-  <style>
-    :root{
-      --bg:#071021; /* deep navy */
-      --card: rgba(255,255,255,0.03);
-      --muted: #9aa6b2;
-      --glass: rgba(255,255,255,0.03);
-      --accent-start:#7b2ff7; /* purple */
-      --accent-end:#2dd4bf;   /* teal */
-      --accent-gradient: linear-gradient(135deg,var(--accent-start),var(--accent-end));
-      --radius:14px;
-      --max-width:1100px;
-    }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Subtle dark overlay to help text pop */
+        }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(123,47,247,0.12), transparent),
-                  radial-gradient(900px 400px at 90% 90%, rgba(45,212,191,0.06), transparent),
-                  var(--bg);
-      color:#e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      padding:36px 20px;
-      display:flex;
-      justify-content:center;
-    }
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
 
-    .container{
-      width:100%;
-      max-width:var(--max-width);
-    }
+        h1 {
+            font-size: 5rem;
+            margin: 0;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+        }
 
-    /* Header / Hero */
-    .hero{
-      display:grid;
-      grid-template-columns: 1fr auto;
-      gap:24px;
-      align-items:center;
-      margin-bottom:28px;
-    }
-
-    .hero-card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius:var(--radius);
-      padding:40px;
-      box-shadow: 0 6px 30px rgba(2,6,23,0.6);
-      display:flex;
-      gap:28px;
-      align-items:center;
-      min-height:180px;
-    }
-
-    .hero-left{
-      flex:1;
-    }
-
-    h1{
-      margin:0 0 8px 0;
-      font-size: clamp(28px, 4vw, 42px);
-      letter-spacing: -0.02em;
-      font-weight:800;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .title-sub{
-      margin:0;
-      font-weight:600;
-      color:var(--muted);
-      font-size:16px;
-    }
-
-    .cta-row{margin-top:18px; display:flex; gap:12px; align-items:center}
-    .btn{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:10px 14px; border-radius:10px; font-weight:600; font-size:14px;
-      cursor:pointer; border:1px solid transparent; text-decoration:none; color:inherit;
-      transition: transform .15s ease, box-shadow .15s ease;
-      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-    }
-    .btn:active{transform:translateY(1px)}
-
-    .btn-primary{
-      background: var(--accent-gradient);
-      color: #051018; box-shadow: 0 6px 22px rgba(43,19,145,0.25);
-    }
-
-    .avatar{
-      width:128px; height:128px; border-radius:18px; overflow:hidden; flex-shrink:0;
-      border:1px solid rgba(255,255,255,0.04); background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      display:flex; align-items:center; justify-content:center;
-    }
-
-    .avatar svg{width:90px; height:90px; opacity:0.9}
-
-    /* Sections grid */
-    .grid{
-      display:grid;
-      grid-template-columns: 1.25fr .9fr;
-      gap:22px;
-      align-items:start;
-    }
-
-    .card{
-      background:var(--card);
-      border-radius:calc(var(--radius) - 2px);
-      padding:22px;
-      box-shadow: 0 8px 30px rgba(3,6,20,0.6);
-      border: 1px solid rgba(255,255,255,0.02);
-    }
-
-    .section-title{
-      display:flex; align-items:center; gap:12px; margin-bottom:12px;
-    }
-    .section-title h3{margin:0; font-size:16px}
-    .section-title p{margin:0; color:var(--muted); font-size:13px}
-
-    /* About */
-    .about p{margin:0 0 12px 0; color:#cfe0ea}
-
-    /* Skills badges */
-    .skills{display:flex; flex-wrap:wrap; gap:10px}
-    .skill{
-      padding:8px 12px; border-radius:999px; font-weight:600; font-size:13px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.03);
-      display:inline-flex; align-items:center; gap:8px;
-    }
-    .skill .dot{
-      width:10px; height:10px; border-radius:50%;
-      background:var(--accent-start); background:var(--accent-gradient);
-      box-shadow:0 4px 18px rgba(43,19,145,0.18);
-    }
-
-    /* Contact */
-    .contact-list{display:flex; flex-direction:column; gap:12px}
-    .contact-item{
-      display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:10px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.02);
-    }
-    .contact-item a{color:inherit; text-decoration:none; font-weight:600}
-    .contact-meta{color:var(--muted); font-size:13px}
-
-    /* Footer tiny */
-    footer{margin-top:18px; text-align:center; color:var(--muted); font-size:13px}
-
-    /* Responsive */
-    @media (max-width:900px){
-      .grid{grid-template-columns:1fr}
-      .hero{grid-template-columns:1fr}
-      .avatar{width:96px;height:96px}
-      .hero-card{padding:22px}
-    }
-
-    @media (max-width:480px){
-      body{padding:20px}
-      .hero-card{flex-direction:column; align-items:flex-start}
-      .cta-row{flex-direction:column; width:100%}
-      .btn{width:100%; justify-content:center}
-    }
-
-  </style>
+        p {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+    </style>
 </head>
 <body>
-  <main class="container" role="main">
 
-    <!-- HERO -->
-    <header class="hero">
-      <div class="hero-card" role="banner">
-        <div class="hero-left">
-          <h1>Bob</h1>
-          <p class="title-sub">Software Developer — Full-stack engineering, APIs & cloud-native apps</p>
-
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#contact" aria-label="Contact Bob">Get in touch</a>
-            <a class="btn" href="#about" aria-label="About Bob">About me</a>
-          </div>
+    <div class="background-container">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>FCB</h1>
+            <p>Més que un club</p>
         </div>
+    </div>
 
-        <div class="avatar" aria-hidden="true">
-          <!-- Simple SVG avatar placeholder -->
-          <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0" stop-color="#7b2ff7"/>
-                <stop offset="1" stop-color="#2dd4bf"/>
-              </linearGradient>
-            </defs>
-            <rect width="128" height="128" rx="18" fill="url(#g)" />
-            <circle cx="64" cy="48" r="20" fill="rgba(255,255,255,0.92)" />
-            <rect x="28" y="80" width="72" height="18" rx="9" fill="rgba(255,255,255,0.9)" />
-          </svg>
-        </div>
-      </div>
-
-      <!-- small meta / quick links (optional) -->
-      <div style="display:flex;flex-direction:column;gap:12px;align-self:stretch;">
-        <div class="card" style="display:flex;flex-direction:column;gap:10px;min-width:240px;">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div>
-              <div style="font-weight:700">Based in</div>
-              <div style="color:var(--muted);font-size:13px">Remote / Anywhere</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="min-width:240px;display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;align-items:center;gap:8px">
-            <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-start);background:var(--accent-gradient)"></div>
-            <div style="font-weight:700">Open to work</div>
-          </div>
-          <div style="color:var(--muted);font-size:13px">Available for freelance, contract, and full-time roles.</div>
-        </div>
-      </div>
-    </header>
-
-    <!-- GRID: ABOUT + RIGHT COLUMN -->
-    <section class="grid">
-
-      <div class="card about">
-        <div class="section-title">
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-start);background:var(--accent-gradient)"></div>
-          <div>
-            <h3>About Me</h3>
-            <p class="section-sub">A short intro</p>
-          </div>
-        </div>
-
-        <p>Hi — I'm Bob. I build web applications and APIs with a focus on performance, maintainability, and delightful user experiences. I enjoy working across the stack, from designing scalable backend services to crafting accessible, responsive UI.</p>
-
-        <p>I have experience with cloud platforms, containerization, and modern frontend frameworks. I like to keep projects simple, testable, and well-documented.</p>
-
-        <div style="margin-top:12px">
-          <h4 style="margin:0 0 8px 0">Recent focus</h4>
-          <ul style="margin:0;padding-left:18px;color:var(--muted)">
-            <li>Designing REST/GraphQL APIs and microservices</li>
-            <li>Serverless & container-based deployments (Docker, Kubernetes)</li>
-            <li>Type-safe frontend apps with modern state management</li>
-          </ul>
-        </div>
-
-        <!-- Skills section inside about to emphasize tech -->
-        <div style="margin-top:18px">
-          <div class="section-title">
-            <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-start);background:var(--accent-gradient)"></div>
-            <div>
-              <h3>Skills</h3>
-              <p class="section-sub">Technologies I use</p>
-            </div>
-          </div>
-
-          <div class="skills" aria-label="Skills">
-            <span class="skill"><span class="dot"></span>JavaScript / TypeScript</span>
-            <span class="skill"><span class="dot"></span>React</span>
-            <span class="skill"><span class="dot"></span>Node.js</span>
-            <span class="skill"><span class="dot"></span>GraphQL</span>
-            <span class="skill"><span class="dot"></span>Docker / Kubernetes</span>
-            <span class="skill"><span class="dot"></span>AWS / Cloud</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN: Contact & Quick Links -->
-      <aside style="display:flex;flex-direction:column;gap:18px">
-        <div class="card">
-          <div class="section-title">
-            <div style="width:10px;height:10px;border-radius:50%;background:var(--accent-start);background:var(--accent-gradient)"></div>
-            <div>
-              <h3 id="contact">Contact</h3>
-              <p class="section-sub">Reach out</p>
-            </div>
-          </div>
-
-          <div class="contact-list">
-            <div class="contact-item" role="article">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 8.5v7A3.5 3.5 0 006.5 19h11A3.5 3.5 0 0021 15.5v-7" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              <div style="display:flex;flex-direction:column">
-                <a href="mailto:bob@example.com">bob@example.com</a>
-                <span class="contact-meta">Prefer email for initial contact</span>
-              </div>
-            </div>
-
-            <div class="contact-item" role="article">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M16 8a6 6 0 016 6v6h-4v-6a2 2 0 00-4 0v6h-4v-6a6 6 0 016-6z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path><path d="M2 9h4v12H2z" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              <div style="display:flex;flex-direction:column">
-                <a href="https://linkedin.com/in/bob" target="_blank" rel="noopener">linkedin.com/in/bob</a>
-                <span class="contact-meta">Connect with me on LinkedIn</span>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="card">
-          <h4 style="margin:0 0 8px 0">Availability</h4>
-          <p style="margin:0;color:var(--muted)">Open to collaborate on small teams or independent projects. Let's build something impactful.</p>
-        </div>
-
-      </aside>
-
-    </section>
-
-    <footer>
-      <div>Made with a focus on clarity, performance & accessibility.</div>
-      <div style="margin-top:8px;color:var(--muted)">This is a single-file static template — replace placeholders (email / LinkedIn) with your real info.</div>
-    </footer>
-
-  </main>
-
-  <!-- Minimal script: smooth scroll for anchor links -->
-  <script>
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        e.preventDefault();
-        const t=document.querySelector(a.getAttribute('href'));
-        if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
-      });
-    });
-  </script>
 </body>
 </html>
