@@ -3,93 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Long Live Barça - Tribute</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <title>GAMAC - Ride for Republic</title>
     <style>
-        :root {
-            --barca-blue: #004d98;
-            --barca-red: #a50044;
-            --barca-gold: #edbb00;
-        }
-        body {
-            background-color: #0a0a0a;
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white;
-            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
-        .gradient-text {
-            background: linear-gradient(90deg, var(--barca-blue), var(--barca-red));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://sgetecymsgwpjhhqxkxu.supabase.co/storage/v1/object/public/contagysai/public/files/25993b78-0f16-4cec-b591-3bf60d925a53/Screenshot_20260121_230315_WhatsApp_corped.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
         }
-        .trophy-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(237, 187, 0, 0.2);
-            transition: transform 0.3s ease;
+
+        /* Dark overlay to make text readable */
+        .background-overlay::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
         }
-        .trophy-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--barca-gold);
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: auto;
+            z-index: 10;
         }
-        .hero-image {
-            box-shadow: 0 0 50px rgba(165, 0, 68, 0.3);
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .main-heading {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin: 0;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+        }
+
+        .sub-heading {
+            font-size: 1.8rem;
+            margin: 10px 0;
+            letter-spacing: 2px;
+        }
+
+        .ride-title {
+            font-size: 2.5rem;
+            color: #FF9933; /* Saffron color */
+            margin: 20px 0;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .details-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .detail-item {
+            font-size: 1.2rem;
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .detail-item strong {
+            color: #128807; /* Green color */
+        }
+
+        .slogan {
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-style: italic;
+            margin-top: 40px;
+            border-top: 2px solid white;
+            padding-top: 15px;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .main-heading { font-size: 2.2rem; }
+            .ride-title { font-size: 1.8rem; }
+            .logo { width: 100px; top: 10px; right: 10px; }
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
-    <div class="max-w-6xl mx-auto">
-        <!-- Header -->
-        <header class="text-center mb-16 animate__animated animate__fadeInDown">
-            <h1 class="text-6xl md:text-8xl font-black mb-4 gradient-text italic">MÉS QUE UN CLUB</h1>
-            <p class="text-xl text-gray-400 tracking-widest uppercase">The Legend of FC Barcelona</p>
-        </header>
+<body>
 
-        <!-- Main Image Section -->
-        <section class="mb-20 animate__animated animate__fadeIn">
-            <div class="relative group overflow-hidden rounded-3xl hero-image">
-                <img src="https://sgetecymsgwpjhhqxkxu.supabase.co/storage/v1/object/public/contagysai/public/files/5c718ef9-bb4e-410c-8a05-f1e2ec36c170/barca1.jpg" 
-                     alt="FC Barcelona Victory" 
-                     class="w-full h-auto transform transition duration-700 group-hover:scale-105">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
-                <div class="absolute bottom-8 left-8">
-                    <h2 class="text-3xl font-bold text-white mb-2">The Golden Era</h2>
-                    <p class="text-barca-gold font-medium">Champions celebrating another historic milestone.</p>
-                </div>
-            </div>
-        </section>
+    <div class="background-overlay"></div>
+    
+    <img src="https://sgetecymsgwpjhhqxkxu.supabase.co/storage/v1/object/public/contagysai/public/files/25993b78-0f16-4cec-b591-3bf60d925a53/Screenshot_20260121_230617_Gallery.jpg" alt="GAMAC Logo" class="logo">
 
-        <!-- Stats/Grid Section -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            <div class="trophy-card p-8 rounded-2xl text-center">
-                <span class="text-5xl block mb-4">🏆</span>
-                <h3 class="text-4xl font-bold mb-2">26</h3>
-                <p class="text-gray-400">La Liga Titles</p>
-            </div>
-            <div class="trophy-card p-8 rounded-2xl text-center">
-                <span class="text-5xl block mb-4">⭐</span>
-                <h3 class="text-4xl font-bold mb-2">5</h3>
-                <p class="text-gray-400">Champions Leagues</p>
-            </div>
-            <div class="trophy-card p-8 rounded-2xl text-center">
-                <span class="text-5xl block mb-4">👑</span>
-                <h3 class="text-4xl font-bold mb-2">31</h3>
-                <p class="text-gray-400">Copa del Rey</p>
-            </div>
+    <div class="content">
+        <h1 class="main-heading">77th Republic Day</h1>
+        <div class="sub-heading">GAMAC presents</div>
+        
+        <div class="ride-title">"Ride for Republic"</div>
+
+        <div class="details-box">
+            <p class="detail-item"><strong>Destination:</strong> Langerdang, West Karbi Anglong</p>
+            <p class="detail-item"><strong>Ride Date & Time:</strong> 26-Jan-26 - 6:45 AM</p>
+            <p class="detail-item"><strong>Meeting Point:</strong> Opp Lily Hotel, GS road</p>
+            <p class="detail-item"><strong>Contact No:</strong> 6000697055, 84028 32968</p>
         </div>
 
-        <!-- Quote -->
-        <blockquote class="text-center mb-20 px-4">
-            <p class="text-3xl italic font-serif text-gray-300">"In the world of football, there is a before and after FC Barcelona."</p>
-        </blockquote>
-
-        <!-- Footer -->
-        <footer class="text-center pb-10 border-t border-gray-800 pt-10">
-            <div class="flex justify-center space-x-4 mb-6">
-                <div class="w-12 h-1 bg-[var(--barca-blue)]"></div>
-                <div class="w-12 h-1 bg-[var(--barca-red)]"></div>
-            </div>
-            <p class="text-gray-500 tracking-widest uppercase text-sm">Visca el Barça i Visca Catalunya</p>
-        </footer>
+        <div class="slogan">
+            Greater Together | United Forever
+        </div>
     </div>
+
 </body>
 </html>
